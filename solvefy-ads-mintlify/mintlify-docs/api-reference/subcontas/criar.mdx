@@ -1,0 +1,84 @@
+---
+title: "Criar subconta"
+api: "POST https://ads.api.dev.solvefy.com/v1/subAccounts"
+description: "Cria uma nova subconta vinculada à sua conta principal."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="name" type="string" required>
+  Nome da subconta
+</ParamField>
+
+<ParamField body="state" type="string" required>
+  Status da subconta. Valores possíveis: `Active`, `Inactive`, `Deleted`, `Draft`
+</ParamField>
+
+<ParamField body="headCount" type="string" required>
+  Faixa de clientes. Valores possíveis: `100`, `100-500`, `500-1000`, `5000-10000`, `10000`
+</ParamField>
+
+<ParamField body="owner" type="object" required>
+  Responsável pela subconta:
+
+  ```json
+  {
+    "id": "ID_DO_USUARIO",
+    "name": "Maria Silva",
+    "role": "Administrator",
+    "profilePicture": "https://..." 
+  }
+  ```
+
+  O campo `role` aceita: `Root`, `Administrator`, `Manager`, `Operator`. O campo `profilePicture` é opcional.
+</ParamField>
+
+## Exemplo
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST https://ads.api.dev.solvefy.com/v1/subAccounts \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Filial SP",
+    "state": "Active",
+    "headCount": "100-500",
+    "owner": {
+      "id": "665a...",
+      "name": "Maria Silva",
+      "role": "Administrator"
+    }
+  }'
+```
+
+```json Body
+{
+  "name": "Filial SP",
+  "state": "Active",
+  "headCount": "100-500",
+  "owner": {
+    "id": "665a...",
+    "name": "Maria Silva",
+    "role": "Administrator"
+  }
+}
+```
+
+</CodeGroup>

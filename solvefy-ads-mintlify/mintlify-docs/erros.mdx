@@ -1,0 +1,32 @@
+---
+title: "Erros comuns"
+description: "Códigos de erro da API e como resolvê-los."
+---
+
+A API retorna códigos HTTP padrão. Veja os erros mais frequentes e como resolver cada um.
+
+## Tabela de erros
+
+| Status | Mensagem | Como resolver |
+|---|---|---|
+| `401` | `sub-account ausente` | Inclua o header `dp-subaccount-id` na requisição. |
+| `401` | `sub-account inválido` | Gere um token de subconta válido em [mkt.solvefy.com/tokens](https://mkt.solvefy.com/tokens). |
+| `403` | `subconta não pertence à conta` | Use uma subconta vinculada à sua própria conta. |
+| `401` | `chave inativa` | Reative a chave no painel ou crie uma nova. |
+| `401` | `chave inválida` | Verifique se copiou a API Key corretamente (sem espaços extras). |
+
+## Formato padrão do erro
+
+Todos os erros retornam um corpo JSON com o campo `message`:
+
+```json
+{
+  "statusCode": 401,
+  "message": "sub-account ausente",
+  "error": "Unauthorized"
+}
+```
+
+<Tip>
+  Sempre verifique o campo `message` no corpo da resposta para entender o que aconteceu.
+</Tip>

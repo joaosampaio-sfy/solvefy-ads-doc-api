@@ -1,0 +1,69 @@
+---
+title: "Atualizar usuário"
+api: "PATCH https://ads.api.dev.solvefy.com/v1/{id}"
+description: "Atualiza os dados de um usuário existente."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  `application/json`
+</ParamField>
+
+## Path
+
+<ParamField path="id" type="string" required>
+  ID do usuário que será atualizado
+</ParamField>
+
+## Body
+
+<ParamField body="firstName" type="string" required>
+  Nome
+</ParamField>
+
+<ParamField body="lastName" type="string" required>
+  Sobrenome
+</ParamField>
+
+<ParamField body="email" type="string" required>
+  E-mail
+</ParamField>
+
+<ParamField body="subAccounts" type="array" required>
+  Mesmo formato do endpoint de criação
+</ParamField>
+
+<ParamField body="role" type="string">
+  Nível de acesso. Valores possíveis: `Root`, `Administrator`, `Manager`, `Operator`
+</ParamField>
+
+## Exemplo
+
+```bash cURL
+curl -X PATCH https://ads.api.dev.solvefy.com/v1/ID_DO_USUARIO \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "firstName": "Maria",
+    "lastName": "Souza",
+    "email": "maria@empresa.com",
+    "subAccounts": [
+      {
+        "id": "664a...",
+        "name": "Filial SP",
+        "kind": "SubAccounts",
+        "account": { "id": "663f...", "name": "Empresa" }
+      }
+    ]
+  }'
+```

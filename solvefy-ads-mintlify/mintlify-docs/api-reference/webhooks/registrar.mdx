@@ -1,0 +1,79 @@
+---
+title: "Registrar webhook"
+api: "POST https://ads.api.dev.solvefy.com/ads/v1/webhookSubscriptions"
+description: "Registra uma URL para receber notificações automáticas sobre eventos das suas campanhas."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="url" type="string" required>
+  URL `https://` que receberá os eventos. Deve ser acessível publicamente.
+</ParamField>
+
+<ParamField body="enabledEvents" type="array" required>
+  Lista de eventos para monitorar. Deve conter ao menos 1 item.
+
+  Eventos disponíveis:
+
+  | Evento | Quando dispara |
+  |---|---|
+  | `click` | Um link da campanha foi clicado |
+  | `delivered` | Mensagem entregue ao destinatário |
+  | `failed` | Falha no envio da mensagem |
+  | `campaign_paused` | Campanha foi pausada |
+  | `low_balance` | Saldo baixo na subconta |
+</ParamField>
+
+<Warning>
+  A resposta retorna o `signingSecret` **uma única vez**. Salve-o imediatamente — ele é usado para validar a autenticidade das notificações recebidas. Não é possível recuperá-lo depois.
+</Warning>
+
+## Exemplo
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST https://ads.api.dev.solvefy.com/ads/v1/webhookSubscriptions \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://meusistema.com/webhooks/ads",
+    "enabledEvents": ["delivered", "failed", "click"]
+  }'
+```
+
+```json Body
+{
+  "url": "https://meusistema.com/webhooks/ads",
+  "enabledEvents": ["delivered", "failed", "click"]
+}
+```
+
+</CodeGroup>
+
+## Resposta
+
+```json
+{
+  "id": "wh_abc123",
+  "url": "https://meusistema.com/webhooks/ads",
+  "enabledEvents": ["delivered", "failed", "click"],
+  "active": true,
+  "signingSecret": "whsec_GUARDE_ESTE_VALOR"
+}
+```

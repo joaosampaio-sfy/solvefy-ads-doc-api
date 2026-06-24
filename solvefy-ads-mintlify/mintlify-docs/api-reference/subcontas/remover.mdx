@@ -1,0 +1,33 @@
+---
+title: "Remover subconta"
+api: "DELETE https://ads.api.dev.solvefy.com/v1/subAccounts/{id}"
+description: "Remove uma subconta da plataforma."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta
+</ParamField>
+
+## Path
+
+<ParamField path="id" type="string" required>
+  ID da subconta a ser removida
+</ParamField>
+
+<Warning>
+  Esta ação é **irreversível**. Todos os dados da subconta serão removidos permanentemente.
+</Warning>
+
+## Exemplo
+
+```bash cURL
+curl -X DELETE https://ads.api.dev.solvefy.com/v1/subAccounts/ID_DA_SUBCONTA \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA"
+```

@@ -1,0 +1,126 @@
+---
+title: "Criar usuário"
+api: "POST https://ads.api.dev.solvefy.com/v1/"
+description: "Cria um novo usuário na plataforma e vincula a uma ou mais subcontas."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="firstName" type="string" required>
+  Nome do usuário
+</ParamField>
+
+<ParamField body="lastName" type="string" required>
+  Sobrenome do usuário
+</ParamField>
+
+<ParamField body="email" type="string" required>
+  E-mail único na conta
+</ParamField>
+
+<ParamField body="role" type="string" required>
+  Nível de acesso do usuário. Valores possíveis: `Root`, `Administrator`, `Manager`, `Operator`
+</ParamField>
+
+<ParamField body="subAccounts" type="array" required>
+  Subcontas vinculadas ao usuário. Cada item deve conter:
+
+  ```json
+  {
+    "id": "ID_DA_SUBCONTA",
+    "name": "Nome",
+    "kind": "SubAccounts",
+    "account": {
+      "id": "ID_DA_CONTA",
+      "name": "Conta"
+    }
+  }
+  ```
+
+  O campo `kind` aceita: `Main` ou `SubAccounts`.
+</ParamField>
+
+<ParamField body="password" type="string">
+  Senha inicial. Se omitida, o usuário define no primeiro acesso.
+</ParamField>
+
+<ParamField body="name" type="string">
+  Nome completo de exibição
+</ParamField>
+
+<ParamField body="position" type="string">
+  Cargo do usuário
+</ParamField>
+
+<ParamField body="cellPhone" type="object">
+  Telefone celular: `{ number, areaCode, countryCode, localNumber }`
+</ParamField>
+
+<ParamField body="profilePicture" type="string">
+  URL da foto de perfil
+</ParamField>
+
+<ParamField body="confirmedEmail" type="boolean">
+  Marca o e-mail como confirmado sem precisar de verificação
+</ParamField>
+
+## Exemplo
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST https://ads.api.dev.solvefy.com/v1/ \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "firstName": "Maria",
+    "lastName": "Silva",
+    "email": "maria@empresa.com",
+    "role": "Operator",
+    "subAccounts": [
+      {
+        "id": "664a...",
+        "name": "Filial SP",
+        "kind": "SubAccounts",
+        "account": { "id": "663f...", "name": "Empresa" }
+      }
+    ]
+  }'
+```
+
+```json Body
+{
+  "firstName": "Maria",
+  "lastName": "Silva",
+  "email": "maria@empresa.com",
+  "role": "Operator",
+  "subAccounts": [
+    {
+      "id": "664a...",
+      "name": "Filial SP",
+      "kind": "SubAccounts",
+      "account": {
+        "id": "663f...",
+        "name": "Empresa"
+      }
+    }
+  ]
+}
+```
+
+</CodeGroup>

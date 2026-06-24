@@ -1,0 +1,145 @@
+---
+title: "Comprar créditos"
+api: "POST https://ads.api.dev.solvefy.com/ads/v1/billing/topUp"
+description: "Recarregue o saldo da subconta via Pix, cartão de crédito ou boleto bancário."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta que receberá os créditos
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  `application/json`
+</ParamField>
+
+## Body — campos comuns
+
+<ParamField body="method" type="string" required>
+  Forma de pagamento. Valores possíveis: `card`, `pix`, `boleto`
+</ParamField>
+
+<ParamField body="amount" type="number" required>
+  Valor da recarga. **Mínimo: 10**
+</ParamField>
+
+<ParamField body="correlationId" type="string" required>
+  Seu identificador interno da transação (para rastreamento)
+</ParamField>
+
+<ParamField body="customer" type="object" required>
+  Dados do pagador:
+
+  ```json
+  {
+    "name": "Maria Silva",
+    "email": "maria@empresa.com",
+    "document": "12345678900",
+    "documentType": "Cpf",
+    "phone": {
+      "number": "999999999",
+      "countryCode": "55",
+      "areaCode": "11",
+      "type": "Mobile"
+    }
+  }
+  ```
+
+  `documentType`: `Cpf`, `Cnpj` ou `Passport`.  
+  `phone.type`: `Mobile`, `Temporary`, `Voicemail`, `Commercial` ou `Residential`.
+</ParamField>
+
+<ParamField body="metadata" type="array">
+  Pares livres `{ key, value }` para uso interno
+</ParamField>
+
+## Campos por método de pagamento
+
+| Campo | card | pix | boleto |
+|---|:---:|:---:|:---:|
+| `encryptedCard` | obrigatório | — | — |
+| `brand` | obrigatório | — | — |
+| `billingAddress` | obrigatório | opcional | — |
+| `customer.address` | — | — | obrigatório |
+| `deadline` | — | — | opcional |
+| `instructions` | — | — | opcional |
+
+Objeto de endereço (`billingAddress` / `customer.address`):
+
+```json
+{
+  "street": "Rua A",
+  "number": "100",
+  "neighborhood": "Centro",
+  "city": "São Paulo",
+  "state": "SP",
+  "country": "BR",
+  "zipCode": "01000-000"
+}
+```
+
+`brand` para cartão: `Visa`, `MasterCard`, `Amex`, `Elo`, `Hipercard`.
+
+<Warning>
+  Para pagamentos com **cartão**, o número nunca é enviado em texto puro. Use o valor criptografado (`encryptedCard`). Entre em contato com o time para o procedimento de criptografia.
+</Warning>
+
+## Exemplos
+
+<CodeGroup>
+
+```json Pix
+{
+  "method": "pix",
+  "amount": 50,
+  "correlationId": "pedido-123",
+  "customer": {
+    "name": "Maria Silva",
+    "email": "maria@empresa.com",
+    "document": "12345678900",
+    "documentType": "Cpf",
+    "phone": {
+      "number": "999999999",
+      "countryCode": "55",
+      "areaCode": "11",
+      "type": "Mobile"
+    }
+  }
+}
+```
+
+```json Boleto
+{
+  "method": "boleto",
+  "amount": 100,
+  "correlationId": "pedido-456",
+  "customer": {
+    "name": "Maria Silva",
+    "email": "maria@empresa.com",
+    "document": "12345678900",
+    "documentType": "Cpf",
+    "phone": {
+      "number": "999999999",
+      "countryCode": "55",
+      "areaCode": "11",
+      "type": "Mobile"
+    },
+    "address": {
+      "street": "Rua A",
+      "number": "100",
+      "neighborhood": "Centro",
+      "city": "São Paulo",
+      "state": "SP",
+      "country": "BR",
+      "zipCode": "01000-000"
+    }
+  }
+}
+```
+
+</CodeGroup>

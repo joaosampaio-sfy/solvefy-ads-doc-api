@@ -1,0 +1,50 @@
+---
+title: "Campanhas"
+description: "Gerencie campanhas de SMS, RCS e outros canais via API."
+---
+
+## Visão geral
+
+A API de campanhas permite consultar e gerenciar campanhas em andamento. Para **criar campanhas**, a recomendação é usar o painel — o corpo da requisição é extenso e montado em múltiplas etapas.
+
+<Info>
+  Precisa criar campanhas via API? Solicite ao time o contrato detalhado dos campos.
+</Info>
+
+## Rotas disponíveis
+
+| Método | Rota | O que faz |
+|---|---|---|
+| `GET` | `/ads/v1/campaigns` | Lista todas as campanhas |
+| `POST` | `/ads/v1/draftCampaigns` | Cria rascunho de campanha |
+| `POST` | `/ads/v1/draftCampaigns/:id/publish` | Publica um rascunho |
+| `GET` | `/ads/v1/dashboard` | Dados do dashboard |
+| `GET` | `/ads/v1/reports` | Relatórios de campanha |
+
+## Listar campanhas
+
+```bash cURL
+curl https://ads.api.dev.solvefy.com/ads/v1/campaigns \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA"
+```
+
+## Resposta exemplo
+
+```json
+[
+  {
+    "id": "camp_abc123",
+    "name": "Agents 90% off",
+    "status": "active",
+    "channel": "sms",
+    "dispatched": 10000,
+    "delivered": 8500,
+    "clicked": 320
+  }
+]
+```
+
+<Tip>
+  Use os endpoints de **relatórios** e **dashboard** para acompanhar métricas de entrega, clique e conversão das suas campanhas.
+</Tip>

@@ -1,0 +1,49 @@
+---
+title: "Dados do usuário"
+api: "GET https://ads.api.dev.solvefy.com/v1/me"
+description: "Retorna as informações do usuário dono da API Key autenticada."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta
+</ParamField>
+
+## Exemplo
+
+<CodeGroup>
+
+```bash cURL
+curl https://ads.api.dev.solvefy.com/v1/me \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA"
+```
+
+```javascript JavaScript
+const response = await fetch("https://ads.api.dev.solvefy.com/v1/me", {
+  headers: {
+    "Authorization": `Bearer ${API_KEY}`,
+    "dp-subaccount-id": SUBACCOUNT_TOKEN
+  }
+});
+const user = await response.json();
+```
+
+</CodeGroup>
+
+## Resposta
+
+```json
+{
+  "id": "665a...",
+  "firstName": "Maria",
+  "lastName": "Silva",
+  "email": "maria@empresa.com",
+  "role": "Administrator"
+}
+```

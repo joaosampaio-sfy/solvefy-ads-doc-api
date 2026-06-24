@@ -1,0 +1,80 @@
+---
+title: "Autenticação"
+description: "Como gerar sua API Key e usá-la em todas as requisições."
+---
+
+## O que você vai precisar
+
+Em toda chamada à API você envia **dois headers obrigatórios**:
+
+| Header | Descrição |
+|---|---|
+| `Authorization: Bearer <sua-api-key>` | A chave criada no passo abaixo |
+| `dp-subaccount-id: <token-da-subconta>` | Identifica em qual subconta a ação será feita |
+
+---
+
+## Passo 1 — Acessar a tela de tokens
+
+1. Faça login na plataforma.
+2. Acesse **[https://mkt.solvefy.com/tokens](https://mkt.solvefy.com/tokens)**.
+
+---
+
+## Passo 2 — Criar a API Key
+
+1. Clique em **Criar Chave API**.
+2. Preencha o **Nome da API** (obrigatório) — ex.: `"Integração ERP"`.
+3. Defina uma **data de expiração** se necessário. Deixe em branco para nunca expirar.
+4. Clique em **Criar chave API** para confirmar.
+
+Depois de criar, abra os **Detalhes** da chave:
+
+- **Chave API** — clique em **Mostrar** e copie. É o valor do header `Authorization: Bearer`.
+- **Subconta** — escolha no seletor qual subconta a chave vai usar.
+- **Chave da Subconta** — clique em **Mostrar** e copie. É o valor do header `dp-subaccount-id`.
+
+<Warning>
+  Nunca exponha sua API Key em código público ou repositórios. Você pode **desativar** ou **excluir** a chave a qualquer momento.
+</Warning>
+
+---
+
+## Passo 3 — Usar a API Key nas requisições
+
+<CodeGroup>
+
+```bash cURL
+curl https://ads.api.dev.solvefy.com/ads/v1/campaigns \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA"
+```
+
+```javascript JavaScript (fetch)
+const response = await fetch("https://ads.api.dev.solvefy.com/ads/v1/campaigns", {
+  headers: {
+    "Authorization": `Bearer ${API_KEY}`,
+    "dp-subaccount-id": `${SUBACCOUNT_TOKEN}`
+  }
+});
+```
+
+```python Python
+import requests
+
+headers = {
+    "Authorization": f"Bearer {API_KEY}",
+    "dp-subaccount-id": SUBACCOUNT_TOKEN
+}
+
+response = requests.get(
+    "https://ads.api.dev.solvefy.com/ads/v1/campaigns",
+    headers=headers
+)
+```
+
+</CodeGroup>
+
+<Info>
+  A chave continua disponível na tela de **Detalhes** sempre que precisar — basta clicar em **Mostrar**.
+</Info>

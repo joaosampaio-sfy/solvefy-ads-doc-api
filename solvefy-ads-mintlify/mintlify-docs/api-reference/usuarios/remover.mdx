@@ -1,0 +1,33 @@
+---
+title: "Remover usuário"
+api: "DELETE https://ads.api.dev.solvefy.com/v1/{id}"
+description: "Remove permanentemente um usuário da plataforma."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta
+</ParamField>
+
+## Path
+
+<ParamField path="id" type="string" required>
+  ID do usuário a ser removido
+</ParamField>
+
+<Warning>
+  Esta ação é **irreversível**. O usuário será removido e perderá acesso à plataforma imediatamente.
+</Warning>
+
+## Exemplo
+
+```bash cURL
+curl -X DELETE https://ads.api.dev.solvefy.com/v1/ID_DO_USUARIO \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA"
+```

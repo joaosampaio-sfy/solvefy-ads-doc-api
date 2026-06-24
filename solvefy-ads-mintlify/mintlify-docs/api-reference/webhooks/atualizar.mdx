@@ -1,0 +1,64 @@
+---
+title: "Atualizar webhook"
+api: "PUT https://ads.api.dev.solvefy.com/ads/v1/webhookSubscriptions/{id}"
+description: "Altera a URL, os eventos monitorados ou ativa/desativa uma assinatura de webhook."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  `application/json`
+</ParamField>
+
+## Path
+
+<ParamField path="id" type="string" required>
+  ID da assinatura de webhook a ser atualizada
+</ParamField>
+
+## Body — envie ao menos um campo
+
+<ParamField body="url" type="string">
+  Nova URL `https://` para receber os eventos
+</ParamField>
+
+<ParamField body="enabledEvents" type="array">
+  Nova lista de eventos monitorados
+</ParamField>
+
+<ParamField body="active" type="boolean">
+  `true` para ativar, `false` para desativar a assinatura
+</ParamField>
+
+## Exemplos
+
+<CodeGroup>
+
+```json Desativar webhook
+{ "active": false }
+```
+
+```json Alterar URL e eventos
+{
+  "url": "https://novosistema.com/webhooks/ads",
+  "enabledEvents": ["delivered", "click", "low_balance"]
+}
+```
+
+</CodeGroup>
+
+```bash cURL
+curl -X PUT https://ads.api.dev.solvefy.com/ads/v1/webhookSubscriptions/wh_abc123 \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA" \
+  -H "Content-Type: application/json" \
+  -d '{ "active": false }'
+```

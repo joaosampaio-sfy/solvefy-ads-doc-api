@@ -1,0 +1,96 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Solvefy Ads",
+  "logo": {
+    "dark": "/logo/logo-dark.svg",
+    "light": "/logo/logo-light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#F5A623",
+    "light": "#F7B84E",
+    "dark": "#D4890F",
+    "anchors": {
+      "from": "#F5A623",
+      "to": "#F7B84E"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Dashboard",
+      "url": "https://mkt.solvefy.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Gerar API Key",
+    "url": "https://mkt.solvefy.com/tokens"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Dashboard",
+      "icon": "chart-bar",
+      "url": "https://mkt.solvefy.com"
+    },
+    {
+      "name": "Suporte",
+      "icon": "envelope",
+      "url": "mailto:suporte@solvefy.com"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Início",
+      "pages": [
+        "introducao",
+        "autenticacao",
+        "erros"
+      ]
+    },
+    {
+      "group": "Usuários",
+      "pages": [
+        "api-reference/usuarios/me",
+        "api-reference/usuarios/criar",
+        "api-reference/usuarios/atualizar",
+        "api-reference/usuarios/remover"
+      ]
+    },
+    {
+      "group": "Subcontas",
+      "pages": [
+        "api-reference/subcontas/me",
+        "api-reference/subcontas/criar",
+        "api-reference/subcontas/atualizar",
+        "api-reference/subcontas/remover"
+      ]
+    },
+    {
+      "group": "Campanhas",
+      "pages": [
+        "api-reference/campanhas/visao-geral"
+      ]
+    },
+    {
+      "group": "Créditos",
+      "pages": [
+        "api-reference/billing/recarga"
+      ]
+    },
+    {
+      "group": "Webhooks",
+      "pages": [
+        "api-reference/webhooks/registrar",
+        "api-reference/webhooks/atualizar"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "website": "https://solvefy.com"
+  }
+}

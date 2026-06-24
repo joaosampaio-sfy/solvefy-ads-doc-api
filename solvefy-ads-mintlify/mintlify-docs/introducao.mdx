@@ -1,0 +1,52 @@
+---
+title: "Introdução"
+description: "Integre seus sistemas diretamente com a plataforma Solvefy Ads via API REST."
+---
+
+# Solvefy Ads — API Reference
+
+Bem-vindo à documentação oficial da **API Solvefy Ads**. Com ela você gerencia usuários, subcontas, créditos, campanhas e webhooks diretamente dos seus sistemas.
+
+<CardGroup cols={2}>
+  <Card title="Autenticação" icon="key" href="/autenticacao">
+    Como gerar e usar sua API Key em todas as requisições.
+  </Card>
+  <Card title="Usuários" icon="user" href="/api-reference/usuarios/criar">
+    Crie, consulte e gerencie usuários da plataforma.
+  </Card>
+  <Card title="Subcontas" icon="building" href="/api-reference/subcontas/criar">
+    Organize clientes e operações em subcontas separadas.
+  </Card>
+  <Card title="Créditos" icon="credit-card" href="/api-reference/billing/recarga">
+    Recarregue saldo via Pix, cartão ou boleto.
+  </Card>
+  <Card title="Webhooks" icon="bolt" href="/api-reference/webhooks/registrar">
+    Receba notificações em tempo real sobre campanhas.
+  </Card>
+  <Card title="Campanhas" icon="megaphone" href="/api-reference/campanhas/visao-geral">
+    Consulte, pause e gerencie campanhas de SMS e outros canais.
+  </Card>
+</CardGroup>
+
+## Base URLs
+
+```
+# Usuários e Subcontas
+https://ads.api.dev.solvefy.com
+
+# Campanhas, Relatórios, Billing e Webhooks
+https://ads.api.dev.solvefy.com/ads/v1
+```
+
+## Autenticação rápida
+
+Toda requisição precisa de dois headers obrigatórios:
+
+| Header | Valor |
+|---|---|
+| `Authorization` | `Bearer <sua-api-key>` |
+| `dp-subaccount-id` | `<token-da-subconta>` |
+
+<Info>
+  Acesse [mkt.solvefy.com/tokens](https://mkt.solvefy.com/tokens) para criar sua chave de API.
+</Info>

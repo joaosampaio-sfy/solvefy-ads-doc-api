@@ -1,0 +1,35 @@
+---
+title: "Dados da subconta"
+api: "GET https://ads.api.dev.solvefy.com/v1/subAccounts/me"
+description: "Retorna as informações da subconta associada ao token dp-subaccount-id enviado no header."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta que deseja consultar
+</ParamField>
+
+## Exemplo
+
+```bash cURL
+curl https://ads.api.dev.solvefy.com/v1/subAccounts/me \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA"
+```
+
+## Resposta
+
+```json
+{
+  "id": "664a...",
+  "name": "Filial SP",
+  "state": "Active",
+  "headCount": "100-500",
+  "kind": "SubAccounts"
+}
+```

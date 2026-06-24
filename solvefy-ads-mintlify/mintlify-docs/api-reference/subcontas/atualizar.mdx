@@ -1,0 +1,57 @@
+---
+title: "Atualizar subconta"
+api: "PATCH https://ads.api.dev.solvefy.com/subAccount/v1/subAccounts/{id}"
+description: "Atualiza campos da subconta. Envie apenas os campos que deseja alterar — todos são opcionais."
+---
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  `Bearer SUA_API_KEY`
+</ParamField>
+
+<ParamField header="dp-subaccount-id" type="string" required>
+  Token da subconta
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  `application/json`
+</ParamField>
+
+## Path
+
+<ParamField path="id" type="string" required>
+  ID da subconta a ser atualizada
+</ParamField>
+
+## Body — todos opcionais
+
+<ParamField body="name" type="string">
+  Nome da subconta
+</ParamField>
+
+<ParamField body="state" type="string">
+  Status. Valores possíveis: `Active`, `Inactive`, `Deleted`, `Draft`
+</ParamField>
+
+<ParamField body="headCount" type="string">
+  Faixa de clientes. Valores possíveis: `100`, `100-500`, `500-1000`, `5000-10000`, `10000`
+</ParamField>
+
+<ParamField body="kind" type="string">
+  Tipo. Valores possíveis: `Main`, `SubAccount`
+</ParamField>
+
+<ParamField body="owner" type="object">
+  Mesmo formato do endpoint de criação
+</ParamField>
+
+## Exemplo
+
+```bash cURL
+curl -X PATCH https://ads.api.dev.solvefy.com/subAccount/v1/subAccounts/ID_DA_SUBCONTA \
+  -H "Authorization: Bearer SUA_API_KEY" \
+  -H "dp-subaccount-id: SEU_TOKEN_DE_SUBCONTA" \
+  -H "Content-Type: application/json" \
+  -d '{ "name": "Nova razão social" }'
+```
